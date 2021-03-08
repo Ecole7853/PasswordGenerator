@@ -19,7 +19,7 @@ var symbols=[
 
 if (passwordLength < 8 || passwordLength > 128){
   alert ("Please enter a number between 8 and 128");
-  return
+  return passwordText;
 }
 var upperCaseQ=confirm("Would you like Uppercase?");
 if (upperCaseQ==true){
@@ -43,42 +43,60 @@ if (symbolsQ==true){
   var hasSymbolQ=false;
 
   for (let index = 0; index < passwordLength; index++) {
-  var character=passwordCharacter[Math.floor(Math.random() * passwordCharacter.length)];
+    var character=passwordCharacter[Math.floor(Math.random() * passwordCharacter.length)];
     
-  if (upperCaseQ==true && hasUpperCaseQ==false){
+    if (upperCaseQ==true && hasUpperCaseQ==false){
+      hasUpperCaseQ = upperCase.includes(character);
+      if (hasUpperCaseQ==false)  
+      {
+        character=upperCase[Math.floor(Math.random() * upperCase.length)];
+        hasUpperCaseQ=true;
+        passwordText+=character;
+        continue;
+      }
+    }
+  
+    if (upperCaseQ==true && hasUpperCaseQ==false){
       hasUpperCaseQ=upperCase.includes(character);
       if (hasUpperCaseQ==false)  
       {character=upperCase[Math.floor(Math.random() * upperCase.length)];
       hasUpperCaseQ==true;}
         if (hasUpperCaseQ==true){
           continue}}
-    
+
     if (lowerCaseQ==true && hasLowerCaseQ==false){
       hasLowerCaseQ=lowerCase.includes(character);
-      if (hasLowerCaseQ==false)  
-      {character=lowerCase[Math.floor(Math.random() * lowerCase.length)];
-      hasLowerCaseQ==true;}
-        if (hasLowerCaseQ==true){
-          continue}}
+      if (hasLowerCaseQ==false) {
+        character=lowerCase[Math.floor(Math.random() * lowerCase.length)];
+        hasLowerCaseQ = true;
+        passwordText+=character;
+        continue;
+      }
+    }
     
     if (numbersQ==true && hasNumberQ==false){
       hasNumberQ=numbers.includes(character);
-      if (hasNumberQ==false)
-      {character=numbers[Math.floor(Math.random() * numbers.length)];
-      hasNumberQ==true;}
-        if (hasNumberQ==true){
-          continue}}
+      if (hasNumberQ==false) {
+        character=numbers[Math.floor(Math.random() * numbers.length)];
+        hasNumberQ=true;
+        passwordText+=character;
+        continue;
+      }
+    }
     
     if (symbolsQ==true && hasSymbolQ==false){
       hasSymbolQ=symbols.includes(character); 
-      if (hasSymbolQ==false)
-      {character=symbols[Math.floor(Math.random() * symbols.length)];
-      hasSymbolQ==true;}
-        if (hasSymbolQ==true){
-          continue}}
-  
-  passwordText+=character;
+      if (hasSymbolQ==false) {
+        character=symbols[Math.floor(Math.random() * symbols.length)];
+        hasSymbolQ=true;
+        passwordText+=character;
+        continue;
       }
+    }
+  
+    passwordText+=character;
+  }
+
   return passwordText;
 }
 function writePassword() {
@@ -88,4 +106,5 @@ function writePassword() {
   passwordText.value = password;
 //needs return
 }
+
 generateBtn.addEventListener("click", writePassword);
