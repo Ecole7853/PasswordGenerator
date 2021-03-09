@@ -41,7 +41,10 @@ if (symbolsQ==true){
   var hasLowerCaseQ=false;
   var hasNumberQ=false;
   var hasSymbolQ=false;
-
+  if (hasUpperCaseQ==false && hasLowerCaseQ==false && hasNumberQ==false && hasSymbolQ==false){
+    alert ("Please enter at least 1 string type");
+    return passwordText;
+  }
   for (let index = 0; index < passwordLength; index++) {
     var character=passwordCharacter[Math.floor(Math.random() * passwordCharacter.length)];
     
@@ -104,7 +107,8 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-//needs return
+
 }
 
 generateBtn.addEventListener("click", writePassword);
+
