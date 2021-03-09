@@ -21,18 +21,22 @@ if (passwordLength < 8 || passwordLength > 128){
   alert ("Please enter a number between 8 and 128");
   return passwordText;
 }
+
 var upperCaseQ=confirm("Would you like Uppercase?");
 if (upperCaseQ==true){
   passwordCharacter=passwordCharacter.concat(upperCase);
 }
+
 var lowerCaseQ=confirm("Would you like Lowercase?");
 if (lowerCaseQ==true){
   passwordCharacter=passwordCharacter.concat(lowerCase);
 }
+
 var numbersQ=confirm("Would you like numbers?");
 if (numbersQ==true){
   passwordCharacter=passwordCharacter.concat(numbers);
 }
+
 var symbolsQ=confirm("Would you like Symbols?");
 if (symbolsQ==true){
   passwordCharacter=passwordCharacter.concat(symbols);
@@ -41,31 +45,31 @@ if (symbolsQ==true){
   var hasLowerCaseQ=false;
   var hasNumberQ=false;
   var hasSymbolQ=false;
-  if (hasUpperCaseQ==false && hasLowerCaseQ==false && hasNumberQ==false && hasSymbolQ==false){
-    alert ("Please enter at least 1 string type");
-    return passwordText;
+ 
+  if (upperCaseQ==false && lowerCaseQ==false && numbersQ==false && symbolsQ==false){
+    alert ("Please enter at least 1 character selection");
+    passwordText="";
   }
+  else {
+    passwordCreate();
+  }
+ 
+function passwordCreate(){
+
   for (let index = 0; index < passwordLength; index++) {
     var character=passwordCharacter[Math.floor(Math.random() * passwordCharacter.length)];
+    console.log(character);
     
     if (upperCaseQ==true && hasUpperCaseQ==false){
       hasUpperCaseQ = upperCase.includes(character);
       if (hasUpperCaseQ==false)  
-      {
-        character=upperCase[Math.floor(Math.random() * upperCase.length)];
+      {character=upperCase[Math.floor(Math.random() * upperCase.length)];
         hasUpperCaseQ=true;
         passwordText+=character;
+        console.log(passwordText);
         continue;
       }
     }
-  
-    if (upperCaseQ==true && hasUpperCaseQ==false){
-      hasUpperCaseQ=upperCase.includes(character);
-      if (hasUpperCaseQ==false)  
-      {character=upperCase[Math.floor(Math.random() * upperCase.length)];
-      hasUpperCaseQ==true;}
-        if (hasUpperCaseQ==true){
-          continue}}
 
     if (lowerCaseQ==true && hasLowerCaseQ==false){
       hasLowerCaseQ=lowerCase.includes(character);
@@ -73,6 +77,7 @@ if (symbolsQ==true){
         character=lowerCase[Math.floor(Math.random() * lowerCase.length)];
         hasLowerCaseQ = true;
         passwordText+=character;
+        console.log(passwordText);
         continue;
       }
     }
@@ -83,6 +88,7 @@ if (symbolsQ==true){
         character=numbers[Math.floor(Math.random() * numbers.length)];
         hasNumberQ=true;
         passwordText+=character;
+        console.log(passwordText);
         continue;
       }
     }
@@ -93,21 +99,22 @@ if (symbolsQ==true){
         character=symbols[Math.floor(Math.random() * symbols.length)];
         hasSymbolQ=true;
         passwordText+=character;
+        console.log(passwordText);
         continue;
       }
     }
   
     passwordText+=character;
+    console.log(passwordText);
   }
-
+}
   return passwordText;
 }
+
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
-
 }
 
 generateBtn.addEventListener("click", writePassword);
